@@ -124,6 +124,79 @@
       src="http://huishao.cc/img/avatar.jpg"
     ></el-avatar>
   </div>
+  <div id="div">
+    <el-radio-group v-model="radio">
+      <el-radio label="1">选项1</el-radio>
+      <el-radio label="2">选项2</el-radio>
+      <el-radio label="3">选项3</el-radio>
+      <el-radio label="4">选项4</el-radio>
+    </el-radio-group>
+  </div>
+  <div id="div">
+    <el-radio-group v-model="city">
+      <el-radio-button label="1">北京</el-radio-button>
+      <el-radio-button label="2">上海</el-radio-button>
+      <el-radio-button label="3">广州</el-radio-button>
+      <el-radio-button label="4">深圳</el-radio-button>
+    </el-radio-group>
+  </div>
+  <div id="div">
+    <el-checkbox-group v-model="checkBox" :min="1" :max="3">
+      <el-checkbox label="1">A</el-checkbox>
+      <el-checkbox label="2">B</el-checkbox>
+      <el-checkbox label="3">C</el-checkbox>
+      <el-checkbox label="4">D</el-checkbox>
+    </el-checkbox-group>
+  </div>
+  <div style="margin: 40px">
+    <el-input
+      v-model="value"
+      placeholder="请输入内容"
+      :disabled="false"
+      :show-password="true"
+      :clearable="true"
+      prefix-icon="el-icon-search"
+      type="text"
+    ></el-input>
+  </div>
+  <div style="margin: 40px">
+    <el-input v-model="value" type="text">
+      <template #prepend>Http://</template>
+      <template #append>.com</template>
+    </el-input>
+  </div>
+  <div style="margin-top: 240px">
+    <el-autocomplete
+      v-model="value"
+      :fetch-suggestions="queryData"
+      placeholder="请输入内容"
+      @select="selected"
+      :highlight-first-item="true"
+    ></el-autocomplete>
+  </div>
+  <div id="div">
+    <el-input-number
+      :min="1"
+      :max="10"
+      :step="1"
+      v-model="num"
+    ></el-input-number>
+  </div>
+  <div>
+    <el-select :multiple="true" :clearable="true" v-model="value">
+      <el-option-group v-for="group in options" :key="group.label">
+        <el-option :label="group.label" :value="group.label">
+      </el-option>
+      <el-option
+          v-for="item in group.options"
+          :value="item.value"
+          :label="item.label"
+          :key="item.value"
+        >
+        </el-option>
+      </el-option-group>
+    </el-select>
+  </div>
 </template>
 
 <script>
@@ -135,6 +208,48 @@ export default {
       inputValue: "",
       loading: true,
       msg: "",
+      radio: "0",
+      city: "1",
+      checkBox: [],
+      value: "",
+      num: "0",
+      options: [
+        {
+          label: "球类",
+          options: [
+            {
+              value: "选项1",
+              label: "足球",
+            },
+            {
+              value: "选项2",
+              label: "篮球",
+              disabled: true,
+            },
+            {
+              value: "选项3",
+              label: "排球",
+            },
+            {
+              value: "选项4",
+              label: "乒乓球",
+            },
+          ],
+        },
+        {
+          label: "休闲",
+          options: [
+            {
+              value: "选项5",
+              label: "散步",
+            },
+            {
+              value: "选项6",
+              label: "游泳",
+            },
+          ],
+        },
+      ]
     }
   },
   mounted() {
@@ -159,6 +274,25 @@ export default {
       this.msg = "这里是请求到的数据",
       this.loading = false;
     },
+    queryData(queryString, callback){
+      let array = [];
+      if(queryString.length > 0) {
+        array.push({value: queryString})
+      }
+      array.push(
+        ...[
+          { value: "衣服" },
+          { value: "裤子" },
+          { value: "帽子" },
+          { value: "鞋子" },
+        ]
+      );
+      callback(array)
+    },
+    selected(obj) {
+      alert(obj.value);
+    },
   },
+  
 }
 </script>
