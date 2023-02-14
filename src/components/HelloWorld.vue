@@ -197,12 +197,80 @@
       </el-option-group>
     </el-select>
   </div>
+  <div>
+    <div class="m-4">
+    <p>Child options expand when clicked (default)</p>
+    <el-cascader v-model="value" :options="optiones" :props="{expandTrigger: 'hover'}" />
+  </div>
+  </div>
+  <div id="div">
+    <el-switch
+      v-model="switch1"
+      active-text="会员"
+      inactive-text="非会员"
+      active-color="#00FF00"
+      inactive-color="#FF0000"
+    ></el-switch>
+  </div>
+  <div id="div">
+    <el-switch
+      v-model="switch2"
+      active-text="加载中"
+      :loading="true"
+    ></el-switch>
+  </div>
+  <div id="div">
+    <el-switch
+      v-model="switch3"
+      inactive-text="禁用"
+      :disabled="true"
+    ></el-switch>
+  </div>
+  <el-slider v-model="sliderValue"
+   :format-tooltip="format"
+   :step="10"
+   :show-stops="true"
+   :show-input="true"
+   range="true"></el-slider>
+   <div style="padding: 40px;">
+    <el-slider v-model="sliderValue" :marks="marks"></el-slider>
+   </div>
+   <div>
+    <el-time-picker
+      :is-range="true"
+      v-model="time"
+      range-separator="~"
+      :arrow-control="true"
+      start-placeholder="开始时间"
+      end-placeholder="结束时间"
+    >
+    </el-time-picker>
+  </div>
+  <div>
+    <el-date-picker
+      v-model="date"
+      type="daterange"
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      >
+    </el-date-picker>
+  </div>
+  <div>
+    <el-color-picker :show-alpha="true" v-model="color"></el-color-picker>
+  </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
+      switch1: false,
+      switch2: true,
+      switch3: false,
+      sliderValue: 0,
+      time: 0,
       tags: ["男装", "女装", "帽子", "鞋子"],
       show: false,
       inputValue: "",
@@ -213,6 +281,18 @@ export default {
       checkBox: [],
       value: "",
       num: "0",
+      date: 0,
+      color: "",
+      marks: {
+        0: "起点",
+        50: "半程啦！",
+        90: {
+          style: {
+            color: "#ff0000",
+          },
+          label: "就到终点啦",
+        },
+      },
       options: [
         {
           label: "球类",
@@ -235,6 +315,36 @@ export default {
               label: "乒乓球",
             },
           ],
+          datas: [
+        {
+          value: "父1",
+          label: "运动",
+          children: [
+            {
+              value: "子1",
+              label: "足球",
+            },
+            {
+              value: "子2",
+              label: "篮球",
+            },
+          ],
+        },
+        {
+          value: "父2",
+          label: "休闲",
+          children: [
+            {
+              value: "子1",
+              label: "游戏",
+            },
+            {
+              value: "子2",
+              label: "魔方",
+            },
+          ],
+        },
+      ],
         },
         {
           label: "休闲",
@@ -249,7 +359,276 @@ export default {
             },
           ],
         },
-      ]
+      ],
+      optiones : [
+  {
+    value: 'guide',
+    label: 'Guide',
+    children: [
+      {
+        value: 'disciplines',
+        label: 'Disciplines',
+        children: [
+          {
+            value: 'consistency',
+            label: 'Consistency',
+          },
+          {
+            value: 'feedback',
+            label: 'Feedback',
+          },
+          {
+            value: 'efficiency',
+            label: 'Efficiency',
+          },
+          {
+            value: 'controllability',
+            label: 'Controllability',
+          },
+        ],
+      },
+      {
+        value: 'navigation',
+        label: 'Navigation',
+        children: [
+          {
+            value: 'side nav',
+            label: 'Side Navigation',
+          },
+          {
+            value: 'top nav',
+            label: 'Top Navigation',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'component',
+    label: 'Component',
+    children: [
+      {
+        value: 'basic',
+        label: 'Basic',
+        children: [
+          {
+            value: 'layout',
+            label: 'Layout',
+          },
+          {
+            value: 'color',
+            label: 'Color',
+          },
+          {
+            value: 'typography',
+            label: 'Typography',
+          },
+          {
+            value: 'icon',
+            label: 'Icon',
+          },
+          {
+            value: 'button',
+            label: 'Button',
+          },
+        ],
+      },
+      {
+        value: 'form',
+        label: 'Form',
+        children: [
+          {
+            value: 'radio',
+            label: 'Radio',
+          },
+          {
+            value: 'checkbox',
+            label: 'Checkbox',
+          },
+          {
+            value: 'input',
+            label: 'Input',
+          },
+          {
+            value: 'input-number',
+            label: 'InputNumber',
+          },
+          {
+            value: 'select',
+            label: 'Select',
+          },
+          {
+            value: 'cascader',
+            label: 'Cascader',
+          },
+          {
+            value: 'switch',
+            label: 'Switch',
+          },
+          {
+            value: 'slider',
+            label: 'Slider',
+          },
+          {
+            value: 'time-picker',
+            label: 'TimePicker',
+          },
+          {
+            value: 'date-picker',
+            label: 'DatePicker',
+          },
+          {
+            value: 'datetime-picker',
+            label: 'DateTimePicker',
+          },
+          {
+            value: 'upload',
+            label: 'Upload',
+          },
+          {
+            value: 'rate',
+            label: 'Rate',
+          },
+          {
+            value: 'form',
+            label: 'Form',
+          },
+        ],
+      },
+      {
+        value: 'data',
+        label: 'Data',
+        children: [
+          {
+            value: 'table',
+            label: 'Table',
+          },
+          {
+            value: 'tag',
+            label: 'Tag',
+          },
+          {
+            value: 'progress',
+            label: 'Progress',
+          },
+          {
+            value: 'tree',
+            label: 'Tree',
+          },
+          {
+            value: 'pagination',
+            label: 'Pagination',
+          },
+          {
+            value: 'badge',
+            label: 'Badge',
+          },
+        ],
+      },
+      {
+        value: 'notice',
+        label: 'Notice',
+        children: [
+          {
+            value: 'alert',
+            label: 'Alert',
+          },
+          {
+            value: 'loading',
+            label: 'Loading',
+          },
+          {
+            value: 'message',
+            label: 'Message',
+          },
+          {
+            value: 'message-box',
+            label: 'MessageBox',
+          },
+          {
+            value: 'notification',
+            label: 'Notification',
+          },
+        ],
+      },
+      {
+        value: 'navigation',
+        label: 'Navigation',
+        children: [
+          {
+            value: 'menu',
+            label: 'Menu',
+          },
+          {
+            value: 'tabs',
+            label: 'Tabs',
+          },
+          {
+            value: 'breadcrumb',
+            label: 'Breadcrumb',
+          },
+          {
+            value: 'dropdown',
+            label: 'Dropdown',
+          },
+          {
+            value: 'steps',
+            label: 'Steps',
+          },
+        ],
+      },
+      {
+        value: 'others',
+        label: 'Others',
+        children: [
+          {
+            value: 'dialog',
+            label: 'Dialog',
+          },
+          {
+            value: 'tooltip',
+            label: 'Tooltip',
+          },
+          {
+            value: 'popover',
+            label: 'Popover',
+          },
+          {
+            value: 'card',
+            label: 'Card',
+          },
+          {
+            value: 'carousel',
+            label: 'Carousel',
+          },
+          {
+            value: 'collapse',
+            label: 'Collapse',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: 'resource',
+    label: 'Resource',
+    children: [
+      {
+        value: 'axure',
+        label: 'Axure Components',
+      },
+      {
+        value: 'sketch',
+        label: 'Sketch Templates',
+      },
+      {
+        value: 'docs',
+        label: 'Design Documentation',
+      },
+    ],
+  },
+]
+
     }
   },
   mounted() {
@@ -292,6 +671,9 @@ export default {
     selected(obj) {
       alert(obj.value);
     },
+    format(value) {
+      return `${value}%111`
+    }
   },
   
 }
