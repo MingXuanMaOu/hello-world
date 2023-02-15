@@ -259,6 +259,51 @@
   <div>
     <el-color-picker :show-alpha="true" v-model="color"></el-color-picker>
   </div>
+  <div id="div">
+    <el-alert title="成功提示的文案" type="success"> </el-alert>
+    <br />
+    <el-alert title="消息提示的文案" type="info"> </el-alert>
+    <br />
+    <el-alert title="警告提示的文案" type="warning"> </el-alert>
+    <br />
+    <el-alert title="错误提示的文案" type="error"> </el-alert>
+  </div>
+  <div>
+    <el-button @click="popTip">弹出信息提示</el-button>
+  </div>
+  <div style="margin-top: 20px">
+    <el-button @click="popAlert">弹出信息提示</el-button>
+  </div>
+  <div style="margin-top: 20px">
+    <el-button @click="notify">弹出信息提示</el-button>
+  </div>
+  <div id="div">
+    <el-table :data="tableData">
+      <el-table-column prop="name" label="姓名"></el-table-column>
+      <el-table-column prop="age" label="年龄"></el-table-column>
+      <el-table-column prop="subject" label="科目"></el-table-column>
+    </el-table>
+  </div>
+  <el-menu
+
+    mode="horizontal"
+  >
+    <el-menu-item index="1">首页</el-menu-item>
+    <el-sub-menu index="2">
+      <template #title>广场</template>
+      <el-menu-item index="2-1">音乐</el-menu-item>
+      <el-menu-item index="2-2">视频</el-menu-item>
+      <el-menu-item index="2-3">游戏</el-menu-item>
+      <el-sub-menu index="2-4">
+        <template #title>体育</template>
+        <el-menu-item index="2-4-1">篮球</el-menu-item>
+        <el-menu-item index="2-4-2">足球</el-menu-item>
+        <el-menu-item index="2-4-3">排球</el-menu-item>
+      </el-sub-menu>
+    </el-sub-menu>
+    <el-menu-item index="3" disabled>个人中心</el-menu-item>
+    <el-menu-item index="4">设置</el-menu-item>
+  </el-menu>
 </template>
 
 <script>
@@ -266,6 +311,23 @@
 export default {
   data() {
     return {
+      tableData: [
+        {
+          name: "小王",
+          age: 29,
+          subject: "Java",
+        },
+        {
+          name: "小李",
+          age: 30,
+          subject: "C++",
+        },
+        {
+          name: "小张",
+          age: 28,
+          subject: "JavaScript",
+        },
+      ],
       switch1: false,
       switch2: true,
       switch3: false,
@@ -673,6 +735,31 @@ export default {
     },
     format(value) {
       return `${value}%111`
+    },
+    popTip() {
+      this.$message({
+        message: "提示内容",
+        type: "warning",
+      });
+    },
+    popAlert() {
+      this.$msgbox({
+        title: "提示",
+        message: "详细的提示内容",
+        type: "warning",
+        showCancelButton: true,
+        showConfirmButton: true,
+        showInput: true,
+      });
+    },
+    notify() {
+      this.$notify({
+        title: "通知标题",
+        message: "通知内容",
+        type: "success",
+        duration: "3000",
+        position: "top-right",
+      })
     }
   },
   
