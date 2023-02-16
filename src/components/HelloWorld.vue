@@ -304,6 +304,37 @@
     <el-menu-item index="3" disabled>个人中心</el-menu-item>
     <el-menu-item index="4">设置</el-menu-item>
   </el-menu>
+  <div style="margin:100px">
+    <el-tabs type="border-card">
+      <el-tab-pane label="页面1" name="1">页面1</el-tab-pane>
+      <el-tab-pane label="页面2" name="2">页面2</el-tab-pane>
+      <el-tab-pane label="页面3" name="3">页面3</el-tab-pane>
+      <el-tab-pane label="页面4" name="4">页面4</el-tab-pane>
+    </el-tabs>
+  </div>
+  <div style="margin:300px">
+    <el-button @click="drawer = true" type="primary">
+      点我打开抽屉
+    </el-button>
+  </div>
+  <el-drawer
+    title="抽屉面板的标题"
+    v-model="drawer"
+    direction="ltr">
+    抽屉面板的内容
+  </el-drawer>
+  <el-container>
+    <el-header height="80px" style="background-color: gray;">Header</el-header>
+    <el-container>
+      <el-aside width="200px" style="background-color: red;">ASide</el-aside>
+      <el-container>
+        <el-main>
+          <div style="height: 300px; background-color: #f1f1f1;">内容</div>
+        </el-main>
+        <el-footer height="80px" style="background-color: gray;">Footer</el-footer>
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
@@ -311,6 +342,7 @@
 export default {
   data() {
     return {
+      drawer: false,
       tableData: [
         {
           name: "小王",
